@@ -1,8 +1,8 @@
 import React from "react";
 
-function CheckBox({ text, ...rest }) {
+function CheckBox({ className, text, ...rest }) {
   return (
-    <label>
+    <label className={className}>
       <input type="checkbox" {...rest} /> <span>{text}</span>
     </label>
   );
