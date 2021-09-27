@@ -6,7 +6,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 function Videos() {
   const [page, setPage] = useState(1);
-  // eslint-disable-next-line no-use-before-define
   const { loading, error, videos, hasMore } = useVideoList(page);
 
   return (
@@ -20,7 +19,15 @@ function Videos() {
         >
           {videos.map((video) =>
             video.noq > 0 ? (
-              <Link to="/quiz" kye={video.youtubeID}>
+              <Link
+                to={{
+                  pathname: `/quiz/${video.youtubeID}`,
+                  state: {
+                    videoTitle: video.title,
+                  },
+                }}
+                kye={video.youtubeID}
+              >
                 <Video
                   title={video.title}
                   id={video.youtubeID}
@@ -28,7 +35,12 @@ function Videos() {
                 />
               </Link>
             ) : (
-              <Video title={video.title} id={video.youtubeID} noq={video.noq} />
+              <Video
+                title={video.title}
+                id={video.youtubeID}
+                noq={video.noq}
+                kye={video.youtubeID}
+              />
             )
           )}
         </InfiniteScroll>
